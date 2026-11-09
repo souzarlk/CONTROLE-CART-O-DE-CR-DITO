@@ -3,45 +3,108 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Sistema de controle de cartão de crédito.">
-  <title>Controle de Cartão de Crédito</title>
+  <meta name="theme-color" content="#101010">
+  <meta name="description" content="Portal interno Costalog para controle de compras e lançamentos de cartões corporativos.">
+  <title>Cartões Corporativos | Costalog</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <header class="topbar">
-    <a class="brand" href="./">Controle de Cartão</a>
-    <span class="status">Projeto em desenvolvimento</span>
+    <a class="brand" href="#" aria-label="Costalog - início"><img src="assets/logo-costalog-white.svg" alt="Costalog"></a>
+    <div class="top-context"><span class="context-dot"></span><span>PORTAL FINANCEIRO &amp; T.I</span><i></i><span>Cartões corporativos</span></div>
+    <nav class="main-nav" aria-label="Navegação principal">
+      <button class="nav-btn active" data-view="dashboard" data-testid="nav-tab-dashboard"><span class="nav-icon">▦</span>Painel</button>
+      <button class="nav-btn" data-view="purchases" data-testid="nav-tab-purchases"><span class="nav-icon">＋</span>Compras</button>
+      <button class="nav-btn" data-view="launches" data-testid="nav-tab-launches"><span class="nav-icon">⇥</span>Lançamentos</button>
+      <button class="nav-btn" data-view="settings" data-testid="nav-tab-settings"><span class="nav-icon">⚙</span>Cartões</button>
+    </nav>
+    <div class="top-actions">
+      <button class="icon-btn" id="themeToggle" title="Alternar tema" aria-label="Alternar tema">◐</button>
+      <div class="user-chip"><span class="user-avatar">CF</span><span><b>Costalog</b><small>Financeiro / T.I</small></span></div>
+      <button class="mobile-menu" id="mobileMenu" aria-label="Abrir menu">☰</button>
+    </div>
   </header>
-
-  <main class="container">
-    <section class="welcome">
-      <p class="eyebrow">PAINEL INICIAL</p>
-      <h1>Controle de Cartão de Crédito</h1>
-      <p>Estrutura inicial pronta para receber as funcionalidades do sistema.</p>
+  <main class="shell">
+    <section class="view active" id="view-dashboard">
+      <div class="page-heading">
+        <div><p class="eyebrow">VISÃO GERAL · CONTROLE FINANCEIRO</p><h1>Painel de controle</h1><p class="subheading">Acompanhe as compras realizadas e a evolução dos lançamentos corporativos.</p></div>
+        <button class="btn btn-primary" data-go="purchases" data-testid="btn-new-purchase"><span>＋</span> Nova compra</button>
+      </div>
+      <div class="period-strip"><span class="live-dot"></span> DADOS DO SISTEMA <span class="period-sep">/</span><span id="todayLabel">Atualizado agora</span><span class="period-spacer"></span><label for="dashboardMonth">Período</label><input type="month" id="dashboardMonth"></div>
+      <div class="kpi-grid">
+        <article class="kpi-card featured"><div class="kpi-top"><span>GASTOS NO PERÍODO</span><span class="kpi-icon">↗</span></div><strong id="kpiSpend">R$ 0,00</strong><small id="kpiSpendCaption">Total de compras registradas</small><div class="kpi-accent"></div></article>
+        <article class="kpi-card"><div class="kpi-top"><span>AGUARDANDO LANÇAMENTO</span><span class="kpi-icon amber">◷</span></div><strong id="kpiPending">R$ 0,00</strong><small id="kpiPendingCaption">0 compras pendentes</small><div class="kpi-foot"><span class="status-pill pending">Pendente</span><span>Fila do financeiro</span></div></article>
+        <article class="kpi-card"><div class="kpi-top"><span>LANÇAMENTOS CONCLUÍDOS</span><span class="kpi-icon green">✓</span></div><strong id="kpiLaunched">R$ 0,00</strong><small id="kpiLaunchedCaption">0 compras lançadas</small><div class="kpi-foot"><span class="status-pill launched">Lançado</span><span>Registrados no controle</span></div></article>
+        <article class="kpi-card"><div class="kpi-top"><span>CARTÕES ATIVOS</span><span class="kpi-icon">▤</span></div><strong id="kpiCards">0</strong><small>Cartões corporativos cadastrados</small><div class="kpi-foot"><span class="neutral-pill">Gestão de cartões</span><span id="kpiInstallments">0 parcelas ativas</span></div></article>
+      </div>
+      <div class="analytics-grid">
+        <article class="panel chart-panel"><div class="panel-head"><div><p class="eyebrow">DISTRIBUIÇÃO</p><h2>Gastos por cartão</h2></div><span class="panel-meta">No período selecionado</span></div><div id="cardChart" class="chart-area"><div class="empty-chart">Cadastre compras para visualizar a distribuição.</div></div></article>
+        <article class="panel"><div class="panel-head"><div><p class="eyebrow">ACOMPANHAMENTO</p><h2>Status dos lançamentos</h2></div></div><div id="statusChart" class="status-chart"></div><div class="legend-list"><span><i class="legend-dot amber-dot"></i>Pendentes</span><span><i class="legend-dot green-dot"></i>Lançados</span></div></article>
+      </div>
+      <div class="lower-grid">
+        <article class="panel"><div class="panel-head"><div><p class="eyebrow">ESTABELECIMENTOS</p><h2>Gastos por local de compra</h2></div><span class="panel-meta">Top 5</span></div><div id="storeChart" class="store-chart"><div class="empty-chart">Sem dados para exibir.</div></div></article>
+        <article class="panel"><div class="panel-head"><div><p class="eyebrow">MOVIMENTAÇÕES</p><h2>Compras recentes</h2></div><button class="text-btn" data-go="launches">Ver todas →</button></div><div id="recentList" class="recent-list"></div></article>
+      </div>
+      <div class="panel insight-panel"><div class="insight-symbol">i</div><div><b>Fluxo de controle</b><p>Registre a compra primeiro. Depois, utilize a fila de lançamentos para incluir os dados fiscais e contábeis. A consulta automática ao ERP está preparada para uma integração futura.</p></div></div>
     </section>
 
-    <section class="summary" aria-label="Resumo">
-      <article class="card">
-        <span class="card-label">Cartões cadastrados</span>
-        <strong>0</strong>
-      </article>
-      <article class="card">
-        <span class="card-label">Despesas registradas</span>
-        <strong>0</strong>
-      </article>
-      <article class="card">
-        <span class="card-label">Faturas em aberto</span>
-        <strong>0</strong>
-      </article>
+    <section class="view" id="view-purchases">
+      <div class="page-heading"><div><p class="eyebrow">ETAPA 01 · REGISTRO OPERACIONAL</p><h1>Registrar compra</h1><p class="subheading">Cadastre a compra realizada no cartão e detalhe cada produto adquirido.</p></div><span class="step-indicator"><b>01</b><span>Compra</span><i></i><b>02</b><span>Lançamento</span></span></div>
+      <form id="purchaseForm" novalidate>
+        <div class="form-layout">
+          <div class="form-main">
+            <article class="panel form-panel"><div class="section-title"><span class="section-number">01</span><div><h2>Dados da compra</h2><p>Informações gerais da transação corporativa.</p></div></div>
+              <div class="field-grid">
+                <label class="field"><span>Cartão utilizado <em>*</em></span><select id="purchaseCard" required data-testid="input-card-select"><option value="">Selecione um cartão</option></select></label>
+                <label class="field"><span>Local / site da compra <em>*</em></span><input id="purchaseStore" required placeholder="Ex.: Amazon, Dell, Mercado Livre" data-testid="input-site-location"></label>
+                <label class="field"><span>Data da compra <em>*</em></span><input id="purchaseDate" type="date" required data-testid="input-purchase-date"></label>
+                <label class="field"><span>Responsável pela compra</span><input id="purchaseOwner" placeholder="Nome do colaborador ou setor"></label>
+                <label class="field full"><span>Observações</span><textarea id="purchaseNotes" rows="2" placeholder="Informações adicionais (opcional)"></textarea></label>
+              </div>
+            </article>
+            <article class="panel form-panel"><div class="section-title"><span class="section-number">02</span><div><h2>Produtos e valores</h2><p>Adicione todos os produtos desta compra. Cada item possui sua própria condição de pagamento.</p></div></div>
+              <div id="productRows"></div>
+              <button type="button" class="btn btn-outline add-product" id="addProduct" data-testid="btn-add-product-row">＋ Adicionar outro produto</button>
+            </article>
+          </div>
+          <aside class="form-aside">
+            <article class="summary-card"><div class="summary-card-head"><span class="summary-card-icon">▤</span><div><b>Resumo da compra</b><small>Atualizado automaticamente</small></div></div>
+              <div class="summary-line"><span>Quantidade de itens</span><b id="sumItems">0</b></div>
+              <div class="summary-line"><span>Valor sem juros</span><b id="sumWithout">R$ 0,00</b></div>
+              <div class="summary-line"><span>Juros embutidos</span><b id="sumInterest">R$ 0,00</b></div>
+              <div class="summary-total"><span>Valor total da compra</span><strong id="sumTotal">R$ 0,00</strong></div>
+              <div class="summary-installment"><span>Valor por parcela (estimado)</span><b id="sumInstallment">—</b></div>
+              <div class="summary-note">O valor total considera o preço final informado para cada produto e sua quantidade.</div>
+            </article>
+            <div class="helper-card"><span>✓</span><div><b>Próxima etapa</b><p>Após salvar, a compra ficará disponível automaticamente na fila de lançamentos do financeiro.</p></div></div>
+            <button class="btn btn-primary btn-block save-purchase" type="submit" data-testid="btn-save-purchase">Salvar compra <span>→</span></button>
+            <p class="form-footnote">Os campos marcados com * são obrigatórios.</p>
+          </aside>
+        </div>
+      </form>
     </section>
 
-    <section class="empty-state">
-      <h2>Seu painel está pronto para começar</h2>
-      <p>As informações e ferramentas de controle serão adicionadas nas próximas etapas.</p>
+    <section class="view" id="view-launches">
+      <div class="page-heading"><div><p class="eyebrow">ETAPA 02 · CONCILIAÇÃO FINANCEIRA</p><h1>Registro de lançamentos</h1><p class="subheading">Compras registradas aguardando os dados fiscais e contábeis do sistema.</p></div><div class="queue-total"><b id="launchQueueCount">0</b><span>compras na fila</span></div></div>
+      <div class="toolbar"><div class="searchbox"><span>⌕</span><input id="launchSearch" placeholder="Buscar por local, produto ou cartão..."></div><select id="launchStatusFilter"><option value="all">Todos os status</option><option value="pendente">Pendentes</option><option value="lancado">Lançados</option></select><select id="launchCardFilter"><option value="all">Todos os cartões</option></select></div>
+      <div class="panel table-panel"><div class="table-scroll"><table><thead><tr><th>COMPRA / DATA</th><th>LOCAL</th><th>CARTÃO</th><th>ITENS</th><th>VALOR TOTAL</th><th>PARCELAS</th><th>STATUS</th><th>AÇÕES</th></tr></thead><tbody id="launchTable"></tbody></table></div><div id="launchEmpty" class="empty-state"><div class="empty-icon">⇥</div><b>Nenhuma compra encontrada</b><p>As compras registradas aparecerão aqui para lançamento.</p><button class="btn btn-primary" data-go="purchases">＋ Registrar compra</button></div></div>
+      <div class="erp-note"><span>⌁</span><div><b>Integração ERP preparada</b><p>A conexão automática com o sistema da empresa ainda não está ativa. O botão de verificação é demonstrativo e não consulta dados reais.</p></div><span class="future-tag">ETAPA FUTURA</span></div>
+    </section>
+
+    <section class="view" id="view-settings">
+      <div class="page-heading"><div><p class="eyebrow">ADMINISTRAÇÃO · MEIOS DE PAGAMENTO</p><h1>Cartões corporativos</h1><p class="subheading">Gerencie os cartões disponíveis para registro de compras.</p></div><button class="btn btn-primary" id="openCardModal">＋ Adicionar cartão</button></div>
+      <div class="settings-summary"><div><span>Cartões cadastrados</span><b id="settingsCardCount">0</b></div><div><span>Compras registradas</span><b id="settingsPurchaseCount">0</b></div><div><span>Volume registrado</span><b id="settingsVolume">R$ 0,00</b></div></div>
+      <div id="cardsGrid" class="cards-grid"></div>
+      <div class="security-note"><span>⌑</span><div><b>Segurança e armazenamento</b><p>Esta versão armazena os registros localmente neste navegador. Para uso simultâneo por diferentes colaboradores, será necessário conectar o sistema a um banco de dados e autenticação corporativa.</p></div></div>
     </section>
   </main>
+  <footer class="footer"><span>© <span id="year"></span> Costalog · Controle de Cartões Corporativos</span><span>Desenvolvido pela equipe de T.I <i>●</i> v1.0</span></footer>
 
-  <footer>Controle de Cartão de Crédito · Versão inicial</footer>
+  <div class="modal-backdrop" id="modalBackdrop" hidden><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-head"><div><p class="eyebrow" id="modalEyebrow">CONFIGURAÇÃO</p><h2 id="modalTitle">Adicionar cartão</h2></div><button class="icon-btn" id="closeModal" aria-label="Fechar">×</button></div><div id="modalContent"></div></section></div>
+  <div class="toast-region" id="toastRegion" aria-live="polite"></div>
   <script src="js/script.js"></script>
 </body>
 </html>
