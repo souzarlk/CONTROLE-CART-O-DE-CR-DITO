@@ -9,7 +9,7 @@ Portal interno para registro de compras realizadas com cartões corporativos e p
 - **Cartões corporativos:** cadastro, edição, ativação/desativação e exclusão de cartões.
 
 ## Publicação
-O projeto é estático e pode ser publicado pelo GitHub Pages. Em **Settings → Pages**, selecione a branch `main` e a pasta `/ (root)`.
+O projeto é estático e pode ser publicado pelo GitHub Pages. Em **Settings → Pages**, selecione **Deploy from a branch**? Não: selecione **GitHub Actions** como fonte de publicação. O workflow `.github/workflows/deploy.yml` publica automaticamente a pasta raiz a cada atualização na branch `main`.
 
 ## Armazenamento e integração
 Nesta primeira versão, os registros são persistidos no `localStorage` do navegador. Isso significa que os dados ficam disponíveis no mesmo navegador/dispositivo e não são compartilhados automaticamente entre colaboradores.
