@@ -53,3 +53,7 @@ body.dark .modal-head{border-color:#383838}
 body.dark .modal-actions{border-color:#383838}
 @media(max-width:760px){.launch-card-groups{grid-template-columns:1fr 1fr}.launch-card-tile{padding:11px}}
 @media(max-width:430px){.launch-card-groups{grid-template-columns:1fr}}
+
+/* Status reais utilizados nos registros */
+.status-label.pendente{background:#fff3df;color:#925000}.status-label.lancado{background:#e5f5eb;color:#146b3b}
+body.dark .status-label.pendente{background:#49351b;color:#ffd18b}body.dark .status-label.lancado{background:#173d29;color:#8ce0aa}
