@@ -10,3 +10,46 @@ body.dark{--bg:#0d0d0d;--surface:#171717;--line:#2c2c2c;color:#f5f5f5;background
 
 /* Campos monetários padronizados */
 .field input.money-input{font-variant-numeric:tabular-nums;text-align:right;letter-spacing:.01em}
+
+/* Cartões e lançamentos por cartão */
+.launch-card-groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:11px;margin:0 0 16px}
+.launch-card-tile{min-width:0;text-align:left;padding:14px 15px;border:1px solid var(--line);border-radius:11px;background:var(--surface);color:var(--text);cursor:pointer;transition:.16s}
+.launch-card-tile b,.launch-card-tile span{display:block}.launch-card-tile b{font-size:11px;color:var(--text);margin-bottom:7px}.launch-card-tile span{font-size:9px;color:var(--muted)}.launch-card-tile.selected{border-color:#e30613;box-shadow:0 0 0 2px #e3061318;background:#fffafa}.launch-card-tile .pending-text{font-style:normal;color:#a45a00}.launch-card-tile .launched-text{font-style:normal;color:#147a43}
+:root{--text:#242424;--muted:#737373;--surface:#fff}
+body.dark{--text:#f4f4f4;--muted:#b8b8b8;--surface:#171717}
+body.dark .launch-card-tile{background:#171717;color:#f4f4f4;border-color:#383838}
+body.dark .launch-card-tile.selected{background:#2a1719;border-color:#e30613}
+body.dark .launch-card-tile b,body.dark .launch-card-tile span{color:#f0f0f0}
+body.dark .launch-card-tile .pending-text{color:#ffc46b}body.dark .launch-card-tile .launched-text{color:#79d99d}
+body.dark .field>span,body.dark .choice-field>span,body.dark .section-title p,body.dark .panel-meta,body.dark .period-strip,body.dark .period-strip label,body.dark .period-strip input,body.dark .bar-name,body.dark .bar-value,body.dark td,body.dark .table-main small,body.dark .table-value,body.dark .summary-line,body.dark .summary-total span,body.dark .summary-note,body.dark .form-footnote,body.dark .empty-state,body.dark .empty-state p,body.dark .recent-info small,body.dark .recent-value,body.dark .legend-list,body.dark .kpi-top,body.dark .kpi-card small,body.dark .kpi-foot,body.dark .settings-summary span,body.dark .security-note p,body.dark .erp-note p{color:#c2c2c2}
+body.dark .field input,body.dark .field select,body.dark .field textarea,body.dark .toolbar select,body.dark .searchbox,body.dark .searchbox input{color:#f5f5f5;background:#101010;border-color:#454545}
+body.dark select option{background:#171717;color:#f5f5f5}
+body.dark input::placeholder,body.dark textarea::placeholder{color:#999}
+body.dark th{background:#242424;color:#e2e2e2;border-color:#3a3a3a}
+body.dark td{border-color:#333;color:#ddd}
+body.dark td b,body.dark .table-main b,body.dark .table-value,body.dark .summary-line b,body.dark .detail-box b{color:#f5f5f5}
+body.dark .product-card,body.dark .launch-item{background:#171717;border-color:#393939}
+body.dark .product-head{background:#242424;border-color:#393939;color:#f5f5f5}
+body.dark .choice-field>span,body.dark .product-body .field>span{color:#ddd}
+body.dark .summary-installment{color:#ccc;background:#242424}
+body.dark .summary-installment b{color:#fff}
+body.dark .queue-total{color:#ddd}
+body.dark .queue-total b{color:#fff}
+body.dark .table-action{color:#f0f0f0;background:#242424;border-color:#4a4a4a}
+body.dark .table-action.primary{color:#ff858b;background:#321c1e;border-color:#713238}
+body.dark .empty-state b{color:#fff}
+body.dark .erp-note{background:#172235;border-color:#2b4264;color:#a9c6fa}
+body.dark .erp-note p{color:#c0d2ee}
+body.dark .security-note{color:#ddd}
+body.dark .modal-head h2,body.dark .modal-form-grid .field>span,body.dark .launch-item h4,body.dark .detail-box b{color:#f5f5f5}
+body.dark .detail-box{background:#242424}
+body.dark .detail-box small{color:#bbb}
+body.dark .footer{color:#b8b8b8}
+body.dark .text-btn{color:#ff747c}
+body.dark .bar-track{background:#383838}
+body.dark .recent-item{border-color:#333}
+body.dark .section-title{border-color:#383838}
+body.dark .modal-head{border-color:#383838}
+body.dark .modal-actions{border-color:#383838}
+@media(max-width:760px){.launch-card-groups{grid-template-columns:1fr 1fr}.launch-card-tile{padding:11px}}
+@media(max-width:430px){.launch-card-groups{grid-template-columns:1fr}}
